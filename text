@@ -1,0 +1,55 @@
+/*function calculate(operation)
+{
+    let num1=parseInt(document.getElementById("num1").value);
+    let num2=parseInt(document.getElementById("num2").value);
+    let result;
+    if(operation == 'add')
+    {
+        result = num1 + num2;
+    }
+    else if(operation == 'sub')
+    {
+        result = num1 - num2;
+    }
+    else if(operation == 'mul')
+    {
+        result = num1 * num2;
+    }
+    else if(operation == 'div')
+    {
+        result = num1 / num2;
+    }
+    else if(operation == 'mod')
+    {
+        result = num1 % num2;
+    }
+    document.getElementById("result").innerText=result;
+}*/
+
+//converting of temperatures
+/*function cal(temp)
+{
+    let num1=parseInt(document.getElementById("num1").value);
+    let f;
+    f=(a*(9.0/5.0))+32;
+    document.getElementById("f").innerText=f;
+}*/
+
+//Window Object
+console.log(window.innerWidth);
+console.log(window.outerWidth);
+console.log(window.screen.width);
+console.log(window.location.href);
+
+//methods of Window Object
+window.alert("Hello World!");
+
+let Response=window.confirm("Are your sure?");
+let name=window.prompt("Enter the username: ");
+window.open("https://google.com","_blank");
+window.close();
+
+window.moveTo(100,100);
+window.resizeTo(700,500);
+setTimeout(() => alert("Hello after 3 seconds"),3000);
+setInterval(() => console.log("Repeating every 2 seconds"),2000);
