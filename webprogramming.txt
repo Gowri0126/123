@@ -189,4 +189,23 @@ function cal(ope)
 
 
 //Find the product of two input numbers (use getElementById()to access user Input)
+________________________________________________________________________________________________________________________________________
+//Window Object (21-02-25)
+console.log(window.innerWidth);
+console.log(window.outerWidth);
+console.log(window.screen.width);
+console.log(window.location.href);
+
+//methods of Window Object
+window.alert("Hello World!");
+
+let Response=window.confirm("Are your sure?");
+let name=window.prompt("Enter the username: ");
+window.open("https://google.com","_blank");
+window.close();
+
+window.moveTo(100,100);
+window.resizeTo(700,500);
+setTimeout(() => alert("Hello after 3 seconds"),3000);
+setInterval(() => console.log("Repeating every 2 seconds"),2000);
 
