@@ -40,3 +40,35 @@ print("Replacing the negative value with 0")
 arr=np.array([-1,1,-2,2,-3,3])
 new=np.where(arr>0,arr,0)
 print(new)
+#Nested function
+'''
+def outer_function(a,b):
+        def inner_function():
+                return a+b
+        result = inner_function()
+        return result + 5
+print(outer_function(3,4))
+
+#function accessing a global  variable in python
+'''
+'''
+present_students=[101, 102, 103, 104]
+def check_attendence(roll_number):
+        if roll_number in present_students:
+                return "Present"
+        else:
+                return "Absent"
+print(check_attendence(101))
+print(check_attendence(999))
+'''
+#function to determine largest of three numbers
+
+def max_of_two(a,b):
+        return a if a>b else b
+def max_of_three(a,b,c):
+        return max_of_two(a,max_of_two(b,c))
+
+print(max_of_three(10,5,7))
+print(max_of_three(-5,-1,-7))
+
+
