@@ -208,4 +208,51 @@ window.moveTo(100,100);
 window.resizeTo(700,500);
 setTimeout(() => alert("Hello after 3 seconds"),3000);
 setInterval(() => console.log("Repeating every 2 seconds"),2000);
+______________________________________________________________________________________________________________________________________
+//onmouse events and eventListner(04-03-25)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+ <!-- <input type="button" id="myButton" value="click">
+    <h1 onclick="this.style.color='blue'">Click on this text!</h1>
+    <h1 onclick="changeStyle(this)">Click on this!</h1>-->
+    <input type="text" id="fname" oninput="reverseText()">
+    <div id="container">
+        <p id="fname">This is a paragraph</p>
+        </div>
+        
+        <button onclick="document.body.style.backgroundColor='lightblue'">Change Background</button>
+    
+        <input type="text" onfocus="this.value='You clicked me!'"/>
+        <script>
+            
+            
+            /*let var1=document.createElement("p");
+            var1.innerHTML="This is a newly created paragraph.";
+            container.appendChild(var1);
+            let var2=document.getElementById("para");
+            container.removeChild(var2);
+            let var3=document.createElement("h2");
+            var3.innerHTML="This is a replaced heading";
+            container.replaceChild(var3,var1);*/
+            
+           // document.getElementById("myBtn").addEventListener("click", function() {alert("Button Clicked!");});
+          // document.getElementById("myButton").onclick=function() {alert("Button Clicked via DOM!");};
+          //document.getElementById("hoverBox").onmouseover=function(){ this.style.backgroundColor="pink";};
+         // document.getElementById("hoverBox").onmouseout=function(){ this.style.backgroundColor="red";};
+         // function changeStyle(element){ element.style.fontSize="40px";}
+        // document.getElementById("clickBox").onmousedown=function(){ this.style.backgroundColor="red";};
+         //document.getElementById("clickBox").onmouseup=function(){ this.style.backgroundColor="green";};
+         function reverseText(){
+                let x=document.getElementById("fname");
+                x.value=x.value.split("").reverse().join("");}
+
+        </script>          
+</body>
+</html>
 
