@@ -255,4 +255,95 @@ ________________________________________________________________________________
         </script>          
 </body>
 </html>
+------------------------------------------------------------------------------------------
+(05-03-25) //form validation
+<body>
+    <form name="myForm" onsubmit="return validateForm()">
+        Name:<input type="text" name="fname">
+        <input type="submit" value="Submit">
+        </form>
+    
+</body>
+<script>
+    function validateForm(){
+        let x = document.forms["myForm"]["fname"].value;
+        if(x == ""){
+            alert("Name must be filled");
+            return false;
+        }
+    }
+</script>
+</html>
+-------------------
+//email validation
+<body>
+   <input type="email" id="email">
+   <button onclick="validateEmail()">Submit</button>
+    
+</body>
+<script>
+   function validateEmail(){
+    let email = document.getElementById("email").value;
+    let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!pattern.test(email)){
+        alert("Invalid email format");
+    }
+   }
+</script>
+</html>
+------------------------
+//Number validation
+<body>
+    <input type="text" id="age">
+    <button onclick="validateNumber()">Submit</button>
+    </body>
+ 
+    <script>
+        function validateNumber(){
+            let age = document.getElementById("age").value;
+            if(isNaN(age) || age < 1){
+                alert("Please enter a valid number");
+            }
+        }
+
+    </script>
+
+</html>
+-------------------------
+//Password strength validation
+
+<body>
+<input type="password" id="password">
+    <button onclick="validatePassword()">Submit</button>
+    </body>
+ <script>
+        function validatePassword(){
+            let password = document.getElementById("password").value;
+            if(password.length < 6){
+                alert("Password must be of atleast 6 characters");
+            }
+        }
+    
+    </script>
+</html>
+-----------------------------------
+//Real-Time validation with oninput Event
+
+<body>
+    <input type="text" id="username" oninput="checkLength()">
+    </body>
+<script>
+function checkLength(){
+            let user=document.getElementById("username").value;
+            if(user.length < 3){
+                document.getElementById("username").style.borderColor="red";
+            }
+            else{
+                document.getElementById("username").style.borderColor="blue";
+            }
+        }
+    
+    </script>
+-----------------------------------------
+ 
 
