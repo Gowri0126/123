@@ -345,5 +345,11 @@ function checkLength(){
     
     </script>
 -----------------------------------------
- 
+2. add a text field where the user must type "JAVASCRIPT"
+
+. Show tick mark if correct(oninput)
+. Show X if incorrect when the user clicks outside(onchange)
+
+3. Form Validation - Email, Password, and Number
+Create a form with:
 
