@@ -345,6 +345,9 @@ function checkLength(){
     
     </script>
 -----------------------------------------
+07-03-25
+1. Mouse Events
+
 2. add a text field where the user must type "JAVASCRIPT"
 
 . Show tick mark if correct(oninput)
