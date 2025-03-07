@@ -348,11 +348,47 @@ function checkLength(){
 07-03-25
 1. Mouse Events
 
+ <style>
+        img{
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <img src="./Assets/1.jpg" alt="" id="img">
+    <script>
+        let img = document.getElementById("img")
+        img.addEventListener("mouseover", function(){
+            img.setAttribute("src","./Assets/2.jpg")
+        })
+        img.addEventListener("mouseout", function(){
+            img.setAttribute("src","./Assets/1.jpg")
+        })
+        img.addEventListener("mousedown", function(){
+            img.style.transform = 'rotate(45deg)'
+        })
+        img.addEventListener("mouseup", function(){
+            img.style.transform = 'rotate(0deg)'
+        })
+    </script>
+
 2. add a text field where the user must type "JAVASCRIPT"
 
 . Show tick mark if correct(oninput)
 . Show X if incorrect when the user clicks outside(onchange)
 
+
+
 3. Form Validation - Email, Password, and Number
 Create a form with:
+. Email Field:Must be a valid email format(onchange). Show correct or X.
+.Password Field:Must be at least 8 characters with one number (oninput) show "Weak" or "Strong"
+. Number Field:Must be exactly 10 digits(oninput). Show correct or X.
+.Submit Button:Disabled until all fields are correctly filled.
 
+4. Using alert(), confirm(),  and prompt()
+
+Create a Javascript that:
+1. Displays an alert box saying "Welcome to our Website!" when the page loads.
+2. Uses a prompt box to ask the use for theri name.
