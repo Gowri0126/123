@@ -1,0 +1,208 @@
+//HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Ticket Booking</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css"> <!-- Linking external CSS file -->
+</head>
+<body>
+
+    <div class="container">
+        <h2>🎟️ Movie Ticket Booking</h2>
+
+        <!-- User Name Input -->
+        <label for="user-name">Enter Your Name:</label>
+        <input type="text" id="user-name" class="form-control mb-3" placeholder="Your Name">
+
+        <!-- Movie Selection -->
+        <label for="movie">Select a Movie:</label>
+        <select id="movie" class="form-select">
+            <option value="830">Avengers: Endgame (₹830)</option>
+            <option value="996">Joker (₹996)</option>
+            <option value="664">Frozen II (₹664)</option>
+            <option value="747">Parasite (₹747)</option>
+        </select>
+
+        <!-- Screen -->
+        <div class="screen"></div>
+
+        <div class="seats"></div>
+
+        <p class="summary">Selected <span id="count">0</span> seats for ₹<span id="total">0</span></p>
+        <button id="book-btn" class="btn btn-primary">Book Now</button>
+
+        <!-- Ticket -->
+        <div id="ticket" class="ticket">
+            <h3 class="ticket-title">🎟️ Movie Ticket 🎟️</h3>
+            <p><strong>Name:</strong> <span id="ticket-name"></span></p>
+            <p><strong>Movie:</strong> <span id="ticket-movie"></span></p>
+            <p><strong>Seats:</strong> <span id="ticket-seats"></span></p>
+            <p class="total"><strong>Total:</strong> ₹<span id="ticket-total"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Linking external JS file -->
+</body>
+</html>
+-----------------------------------------------------------------------------------------------
+//CSS
+
+body { 
+    background-image: url('https://png.pngtree.com/back_origin_pic/04/19/44/7c035cf0183f32632ab300b62ade3c6b.jpg'); 
+    background-color: #f8f9fa; 
+    text-align: center; 
+    background-size: cover;
+    background-position: center; 
+    background-attachment: fixed;
+    height: 100vh;
+}
+
+.container { 
+    max-width: 600px; 
+    margin-top: 30px; 
+}
+
+/* Screen Section */
+.screen { 
+    width: 100%; 
+    height: 300px; 
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG7S0UiLezhBxZBsmX1A3-rxZMWxxtPRFWhQ&s') center/cover no-repeat; 
+    color: white; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 20px; 
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Seat Grid */
+.seats { 
+    display: grid; 
+    grid-template-columns: repeat(8, 40px); 
+    gap: 10px; 
+    justify-content: center; 
+}
+
+.seat { 
+    width: 40px; 
+    height: 40px; 
+    background: gray; 
+    border-radius: 5px; 
+    cursor: pointer; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: white; 
+    font-size: 14px; 
+}
+
+.seat.selected { background: green; }
+.seat.occupied { background: red; cursor: not-allowed; }
+
+.summary { 
+    margin-top: 20px; 
+    font-size: 18px; 
+}
+
+/* Ticket Section */
+.ticket { 
+    background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb3nWnUt2Rg8C1XF9LQzMsIZwkBfUotp0gZA&s');
+    display: none; 
+    padding: 15px; 
+    border: 2px solid black; 
+    border-radius: 10px; 
+    width: 300px; 
+    margin: auto; 
+    text-align: left; 
+}
+
+.ticket-title { 
+    font-size: 24px; 
+    color: #007bff; 
+    text-align: center; 
+    margin-bottom: 15px; 
+}
+
+.total { 
+    font-size: 18px; 
+    color: red; 
+    font-weight: bold; 
+    margin: 10px 0; 
+}
+------------------------------------------------------------------------------------------------------
+//JS
+
+const movieSelect = document.getElementById("movie"),
+      userNameInput = document.getElementById("user-name"),
+      seatsContainer = document.querySelector(".seats"),
+      count = document.getElementById("count"), 
+      total = document.getElementById("total"),
+      bookBtn = document.getElementById("book-btn"), 
+      ticket = document.getElementById("ticket"),
+      ticketName = document.getElementById("ticket-name"), 
+      ticketMovie = document.getElementById("ticket-movie"),
+      ticketSeats = document.getElementById("ticket-seats"), 
+      ticketTotal = document.getElementById("ticket-total");
+
+let selectedSeats = new Set();
+
+// Generate Seats with Numbers
+for (let i = 1; i <= 40; i++) {
+    const seat = document.createElement("div");
+    seat.classList.add("seat");
+    seat.innerText = i; 
+
+    if (Math.random() < 0.2) seat.classList.add("occupied");
+    else seat.addEventListener("click", () => toggleSeat(seat, i));
+
+    seatsContainer.appendChild(seat);
+}
+
+function toggleSeat(seat, index) {
+    if (!seat.classList.contains("occupied")) {
+        seat.classList.toggle("selected");
+        selectedSeats.has(index) ? selectedSeats.delete(index) : selectedSeats.add(index);
+        updateSummary();
+    }
+}
+
+function updateSummary() {
+    count.innerText = selectedSeats.size;
+    total.innerText = "₹" + (selectedSeats.size * +movieSelect.value);
+}
+
+movieSelect.addEventListener("change", updateSummary);
+
+bookBtn.addEventListener("click", () => {
+    const userName = userNameInput.value.trim();
+    if (!userName) return alert("❌ Please enter your name!");
+    if (selectedSeats.size === 0) return alert("❌ Select at least one seat!");
+
+    alert(`🎉 Booking confirmed for ${selectedSeats.size} seats!`);
+
+    const movieName = movieSelect.options[movieSelect.selectedIndex].text.split(" (₹")[0];
+
+    // Display ticket details
+    ticketName.innerText = userName;
+    ticketMovie.innerText = movieName;
+    ticketSeats.innerText = [...selectedSeats].join(", ");
+    ticketTotal.innerText = "₹" + (selectedSeats.size * +movieSelect.value);
+    ticket.style.display = "block";
+
+    // Mark seats as occupied
+    selectedSeats.forEach(index => {
+        const seat = seatsContainer.children[index - 1];
+        seat.classList.add("occupied");
+        seat.classList.remove("selected");
+    });
+
+    selectedSeats.clear();
+    updateSummary();
+});
+
