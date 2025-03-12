@@ -387,8 +387,114 @@ Create a form with:
 . Number Field:Must be exactly 10 digits(oninput). Show correct or X.
 .Submit Button:Disabled until all fields are correctly filled.
 
-4. Using alert(), confirm(),  and prompt()
 
-Create a Javascript that:
-1. Displays an alert box saying "Welcome to our Website!" when the page loads.
-2. Uses a prompt box to ask the use for theri name.
+<body>
+  <!--  <input type="text" id="age">
+    <button onclick="validateNumber()">Submit</button>
+    <input type="password" id="password">
+    <button onclick="validatePassword()">Submit</button>
+    <input type="text" id="username" oninput="checkLength()">-->
+    </body>
+ 
+    <script>
+    /*    function validateNumber(){
+            let age = document.getElementById("age").value;
+            if(isNaN(age) || age < 1){
+                alert("Please enter a valid number");
+            }
+        }
+        function validatePassword(){
+            let password = document.getElementById("password").value;
+            if(password.length < 6){
+                alert("Password must be of atleast 6 characters");
+            }
+        }
+        function checkLength(){
+            let user=document.getElementById("username").value;
+            if(user.length < 3){
+                document.getElementById("username").style.borderColor="red";
+            }
+            else{
+                document.getElementById("username").style.borderColor="blue";
+            }
+        }*/
+    
+    </script>
+----------------------------------------------------------------------------------
+12-03-25  Javascript
+ let x=10;
+        const y=15;
+        console.log(x);
+        console.log(y);
+        x=20;
+        console.log(x);
+        y=10;
+        console.log(y);
+--------------------------------
+  let add =(a,b) => a+b;
+    console.log(add(10,15));   //25
+    let sub =(a,b) => a-b;
+    console.log(sub(20,10));     //10
+    let mul=(a,b) => a*b;
+    console.log(mul(25,10));     //250
+    let div=(a,b) => a/b;
+    console.log(div(200,5));     //40
+----------------------------------
+Arrays
+let numbers=[15,25,35];
+    for(let num of numbers)
+    {
+        console.log(num);
+    }
+
+Strings
+let word="apple";
+    for(let a of word)
+    {
+        console.log(a);
+    }
+--------------------------------
+    //Back-Ticks syntax:
+    let text =`Hello World!`;
+    console.log(text);
+    //Quotes inside Strings:
+    let text1=`He's often called "Alice"`;
+    console.log(text1);
+   // Multiline Strings:
+    let text2=`The quick
+    brown fox
+    jumps over
+    the lazy dog`;
+    console.log(text2);
+ let num=500;
+    console.log(`The value of num is: ${num}`);
+ let firstName ="John";
+    let text4=`Welcome ${firstName}`;
+    console.log(text4);
+    let radius=5;
+    let area = `The area of a circle with radius ${radius} is ${(Math.PI*radius**2).toFixed(2)}`;
+    console.log(area);
+-------------------------------------
+Map objects:
+  const fruits = new Map([
+    ["apples", 200],
+    ["banana", 300],
+    ["orange", 450]
+   ]);
+    console.log(fruits.get("apples"));  //200
+    console.log(fruits.size);  //3
+    console.log(fruits.delete("orange")); //true
+    console.log(fruits.size); //2
+    console.log(fruits.set("pineapple", 600));
+    console.log(fruits.has("bananas"));  //false
+    console.log(fruits.has("pineapple"));  //true
+    console.log(fruits.clear());  //undefined
+    console.log(fruits.size);  //0
+-------------------------------------
+Set objects
+const letters=new Set();
+    letters.add("a");
+    letters.add("b");
+    letters.add("c");
+    console.log(letters.has("b"));
+
