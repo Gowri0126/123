@@ -10,7 +10,7 @@
 <body>
 
     <div class="container">
-        <h2>🎟️ Movie Ticket Booking</h2>
+        <h2>🎟️ Movie Ticket Booking>🎟️</h2>
 
         <!-- User Name Input -->
         <label for="user-name">Enter Your Name:</label>
@@ -19,10 +19,10 @@
         <!-- Movie Selection -->
         <label for="movie">Select a Movie:</label>
         <select id="movie" class="form-select">
-            <option value="830">Avengers: Endgame (₹830)</option>
-            <option value="996">Joker (₹996)</option>
-            <option value="664">Frozen II (₹664)</option>
-            <option value="747">Parasite (₹747)</option>
+            <option value="300">Anabelle Creations (₹300)</option>
+            <option value="250">Max (₹250)</option>
+            <option value="400">KGF (₹400)</option>
+            <option value="500">Charlie (₹500)</option>
         </select>
 
         <!-- Screen -->
@@ -118,7 +118,7 @@ body {
     border-radius: 10px; 
     width: 300px; 
     margin: auto; 
-    text-align: left; 
+    text-align: center; 
 }
 
 .ticket-title { 
