@@ -1,4 +1,4 @@
-//movie tiocket booking
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +94,7 @@
 <body>
 
     <div class="container">
-        <h2>🎟️ Movie Ticket Booking 🎟️</h2>
+        <h2> Booking </h2>
 
         <label for="user-name">Enter Your Name:</label>
         <input type="text" id="user-name" class="form-control mb-3" placeholder="Your Name">
@@ -117,7 +117,7 @@
         <button id="book-btn" class="btn btn-primary">Book Now</button>
 
         <div id="ticket" class="ticket">
-            <h3 class="ticket-title">🎟️ Movie Ticket 🎟️</h3>
+            <h3 class="ticket-title"> Movie Ticket </h3>
             <p><strong>Name:</strong> <span id="ticket-name"></span></p>
             <p><strong>Contact:</strong> <span id="ticket-contact"></span></p>
             <p><strong>Movie:</strong> <span id="ticket-movie"></span></p>
