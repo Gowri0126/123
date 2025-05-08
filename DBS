@@ -1,0 +1,268 @@
+Microsoft Windows [Version 10.0.26100.3775]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Windows\System32>mysql -u mcauser1 -p
+Enter password: **********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.0.37 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database university;
+ERROR 1007 (HY000): Can't create database 'university'; database exists
+mysql> create database  university;
+ERROR 1007 (HY000): Can't create database 'university'; database exists
+mysql> create database  university32;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use university32;
+Database changed
+mysql> create table student(studentid int(3) primary key,studentname char(30)not null,email varchar(50),major varchar(50));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   |     | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.02 sec)
+
+mysql> create table department(departmentid int primary key, departmentname varchar(30) not null);
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> create table course(courseid int primary key,title varchar(30) not null,credits int not null,departmentid int, foreign key(departmentid)references department(departmentid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc course
+    -> ;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| courseid     | int         | NO   | PRI | NULL    |       |
+| title        | varchar(30) | NO   |     | NULL    |       |
+| credits      | int         | NO   |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc department;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| departmentid   | int         | NO   | PRI | NULL    |       |
+| departmentname | varchar(30) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> create table instructor(instructorid int primary key,instructorname char(30) not null,dept_id int,foreign key(dept_id) references department(departmentid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc instructor;
++----------------+----------+------+-----+---------+-------+
+| Field          | Type     | Null | Key | Default | Extra |
++----------------+----------+------+-----+---------+-------+
+| instructorid   | int      | NO   | PRI | NULL    |       |
+| instructorname | char(30) | NO   |     | NULL    |       |
+| dept_id        | int      | YES  | MUL | NULL    |       |
++----------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> create table enrollment(studentid int,courseid,semester varchar(5),grade char(2),foreign key(studentid) references student(studentid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',semester varchar(5),grade char(2),foreign key(studentid) references student(stu' at line 1
+mysql> create table enrollment(studentid int,courseid,semester varchar(5),grade char(2),foreign key(studentid) references student(studentid),foreign key(courseid) references course(courseid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ',semester varchar(5),grade char(2),foreign key(studentid) references student(stu' at line 1
+mysql> create table enrollment(studentid int,courseid int,semester varchar(5),grade char(2),foreign key(studentid) references student(studentid),foreign key(courseid) references course(courseid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table student add bloodgroup varchar(5);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   |     | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
+| bloodgroup  | varchar(5)  | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student drop bloodgroup varchar(5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'varchar(5)' at line 1
+mysql> alter table student drop bloodgroup;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   |     | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table student add phonenumber int(10);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   |     | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
+| phonenumber | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table student rename column phonenumber PH_NO;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'PH_NO' at line 1
+mysql> alter table student add constraints studentname unique(studentname);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'studentname unique(studentname)' at line 1
+mysql> alter table student add constraint unique(studentname);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   | UNI | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
+| phonenumber | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table enrollment modify column semester varchar(5) not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc enrollment;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| studentid | int        | YES  | MUL | NULL    |       |
+| courseid  | int        | YES  | MUL | NULL    |       |
+| semester  | varchar(5) | NO   |     | NULL    |       |
+| grade     | char(2)    | YES  |     | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table enrollment modify column studentid int,courseid int not null;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'courseid int not null' at line 1
+mysql> alter table student remane column phonenumber to PH_NO;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'remane column phonenumber to PH_NO' at line 1
+mysql> alter table student rename column phonenumber to PH_NO;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| studentid   | int         | NO   | PRI | NULL    |       |
+| studentname | char(30)    | NO   | UNI | NULL    |       |
+| email       | varchar(50) | YES  |     | NULL    |       |
+| major       | varchar(50) | YES  |     | NULL    |       |
+| PH_NO       | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table enrollment modify column studentid int not null,modify column courseid int not null;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc enrollment;
++-----------+------------+------+-----+---------+-------+
+| Field     | Type       | Null | Key | Default | Extra |
++-----------+------------+------+-----+---------+-------+
+| studentid | int        | NO   | MUL | NULL    |       |
+| courseid  | int        | NO   | MUL | NULL    |       |
+| semester  | varchar(5) | NO   |     | NULL    |       |
+| grade     | char(2)    | YES  |     | NULL    |       |
++-----------+------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table dummy(dummy1 int);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc dummy;
++--------+------+------+-----+---------+-------+
+| Field  | Type | Null | Key | Default | Extra |
++--------+------+------+-----+---------+-------+
+| dummy1 | int  | YES  |     | NULL    |       |
++--------+------+------+-----+---------+-------+
+1 row in set (0.00 sec)
+
+mysql> drop table dummy;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc dummy;
+ERROR 1146 (42S02): Table 'university32.dummy' doesn't exist
+mysql> desc instructor;
++----------------+----------+------+-----+---------+-------+
+| Field          | Type     | Null | Key | Default | Extra |
++----------------+----------+------+-----+---------+-------+
+| instructorid   | int      | NO   | PRI | NULL    |       |
+| instructorname | char(30) | NO   |     | NULL    |       |
+| dept_id        | int      | YES  | MUL | NULL    |       |
++----------------+----------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> alter table department drop departmentid int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int' at line 1
+mysql> desc department;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| departmentid   | int         | NO   | PRI | NULL    |       |
+| departmentname | varchar(30) | NO   |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table instructor drop departmentid int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int' at line 1
+mysql> alter table instructor drop dept_id int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'int' at line 1
+mysql> alter table instructor drop dept_id;
+ERROR 1828 (HY000): Cannot drop column 'dept_id': needed in a foreign key constraint 'instructor_ibfk_1'
+mysql> alter table department drop departmentid;
+ERROR 1829 (HY000): Cannot drop column 'departmentid': needed in a foreign key constraint 'course_ibfk_1' of table 'course'
+mysql> create table new(new1 int, instructorid int,foreign key(instructor) references  instructor(instructorid));
+ERROR 1072 (42000): Key column 'instructor' doesn't exist in table
+mysql> create table new(new1 int, instructorid int,foreign key(instructorid) references  instructor(instructorid));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc new;
++--------------+------+------+-----+---------+-------+
+| Field        | Type | Null | Key | Default | Extra |
++--------------+------+------+-----+---------+-------+
+| new1         | int  | YES  |     | NULL    |       |
+| instructorid | int  | YES  | MUL | NULL    |       |
++--------------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> alter table enrollment drop foreign key courseid;
+ERROR 1091 (42000): Can't DROP 'courseid'; check that column/key exists
+mysql>
