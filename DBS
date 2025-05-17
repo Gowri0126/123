@@ -264,5 +264,239 @@ mysql> desc new;
 2 rows in set (0.00 sec)
 
 mysql> alter table enrollment drop foreign key courseid;
+--------------------------------------
+17-05-25
+
+mysql> create database company;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use database company;
+ERROR 1049 (42000): Unknown database 'database'
+mysql> use company;
+Database changed
+mysql> create department;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'department' at line 1
+mysql> create table department;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table department(departmentid int primary key, departmentname char(30)not null, location varchar(30));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc department;
++----------------+-------------+------+-----+---------+-------+
+| Field          | Type        | Null | Key | Default | Extra |
++----------------+-------------+------+-----+---------+-------+
+| departmentid   | int         | NO   | PRI | NULL    |       |
+| departmentname | char(30)    | NO   |     | NULL    |       |
+| location       | varchar(30) | YES  |     | NULL    |       |
++----------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql>  create table employee(employeeid int(3) primary key,name varchar(20)not null,email varchar(50),phone int(10),hire_date date,jobtitle char(20), departmentid int, foreign key(departmentid)references department(departmentid),managerid int,foreign key(managerid)references employee(employeeid));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
+| managerid    | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create table project;
+ERROR 4028 (HY000): A table must have at least one visible column.
+mysql> create table project(projectid int primary key, projectname varchar(20)not null,start_date date, end_date date, budget int(10),departmentid int, foreign key(departmentid)references department(departmentid));
+Query OK, 0 rows affected, 1 warning (0.02 sec)
+
+mysql> desc project;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| projectid    | int         | NO   | PRI | NULL    |       |
+| projectname  | varchar(20) | NO   |     | NULL    |       |
+| start_date   | date        | YES  |     | NULL    |       |
+| end_date     | date        | YES  |     | NULL    |       |
+| budget       | int         | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> create table assignment(assignmentid int primary key, employeeid int,foreign key(employeeid)references employee(employeeid),projectid int,foreign key(projectid)references project(projectid),role varchar(20),hoursworked int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc assignment;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| assignmentid | int         | NO   | PRI | NULL    |       |
+| employeeid   | int         | YES  | MUL | NULL    |       |
+| projectid    | int         | YES  | MUL | NULL    |       |
+| role         | varchar(20) | YES  |     | NULL    |       |
+| hoursworked  | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table employee drop column managerid;
+ERROR 1828 (HY000): Cannot drop column 'managerid': needed in a foreign key constraint 'employee_ibfk_2'
+mysql> alter table employee drop constraint managerid;
+ERROR 3940 (HY000): Constraint 'managerid' does not exist.
+mysql> alter table employee drop foreign key;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee drop index;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee drop foreign key managerid;
+ERROR 1091 (42000): Can't DROP 'managerid'; check that column/key exists
+mysql> alter table employee drop constraint managerid;
+ERROR 3940 (HY000): Constraint 'managerid' does not exist.
+mysql> alter table employee drop foreign key  fk_managerid;
+ERROR 1091 (42000): Can't DROP 'fk_managerid'; check that column/key exists
+mysql> alter table employee drop foreign key  ibfk_managerid;
+ERROR 1091 (42000): Can't DROP 'ibfk_managerid'; check that column/key exists
+mysql> alter table employee drop foreign key managerid_ibfk_1;
+ERROR 1091 (42000): Can't DROP 'managerid_ibfk_1'; check that column/key exists
+mysql> alter table employee drop foreign key managerid_ibfk_2;
+ERROR 1091 (42000): Can't DROP 'managerid_ibfk_2'; check that column/key exists
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
+| managerid    | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table employee drop foreign key employee_ibfk_2;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
+| managerid    | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table employee drop constraint employee_ibfk_2;
+ERROR 3940 (HY000): Constraint 'employee_ibfk_2' does not exist.
+mysql> alter table employee drop constraint foreign key employee_ibfk_2;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key employee_ibfk_2' at line 1
+mysql> alter table employee drop employee_ibfk_2;
+ERROR 1091 (42000): Can't DROP 'employee_ibfk_2'; check that column/key exists
+mysql> alter table employee drop column managerid;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> alter table employee add managerid int,foreign key(managerid)references employee(employeeid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'foreign key(managerid)references employee(employeeid))' at line 1
+mysql> alter table employee add managerid int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
+| managerid    | int         | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> alter table employee managerid int,foreign key(managerid)references employee(employeeid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'managerid int,foreign key(managerid)references employee(employeeid))' at line 1
+mysql> alter table employee(managerid int,foreign key(managerid)references employee(employeeid));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(managerid int,foreign key(managerid)references employee(employeeid))' at line 1
+mysql> alter table employee add foreign key(managerid)references employee(employeeid);
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| employeeid   | int         | NO   | PRI | NULL    |       |
+| name         | varchar(20) | NO   |     | NULL    |       |
+| email        | varchar(50) | YES  |     | NULL    |       |
+| phone        | int         | YES  |     | NULL    |       |
+| hire_date    | date        | YES  |     | NULL    |       |
+| jobtitle     | char(20)    | YES  |     | NULL    |       |
+| departmentid | int         | YES  | MUL | NULL    |       |
+| managerid    | int         | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+mysql> create table salary(salaryid int primary key,employeeid int,foreign key(employeeid)references employee(employeeid),amount int,effective_date date,pay_grade char);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc salary;
++----------------+---------+------+-----+---------+-------+
+| Field          | Type    | Null | Key | Default | Extra |
++----------------+---------+------+-----+---------+-------+
+| salaryid       | int     | NO   | PRI | NULL    |       |
+| employeeid     | int     | YES  | MUL | NULL    |       |
+| amount         | int     | YES  |     | NULL    |       |
+| effective_date | date    | YES  |     | NULL    |       |
+| pay_grade      | char(1) | YES  |     | NULL    |       |
++----------------+---------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> create table leave(leaveid int primary key,employeeid int,foreign key(employeeid)references employee(employeeid),start_date date,end_date date,leavetype char(30),status char);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'leave(leaveid int primary key,employeeid int,foreign key(employeeid)references e' at line 1
+mysql> create table leave1(leaveid int primary key,employeeid int,foreign key(employeeid)references employee(employeeid),start_date date,end_date date,leavetype char(30),status char);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc leave1;
++------------+----------+------+-----+---------+-------+
+| Field      | Type     | Null | Key | Default | Extra |
++------------+----------+------+-----+---------+-------+
+| leaveid    | int      | NO   | PRI | NULL    |       |
+| employeeid | int      | YES  | MUL | NULL    |       |
+| start_date | date     | YES  |     | NULL    |       |
+| end_date   | date     | YES  |     | NULL    |       |
+| leavetype  | char(30) | YES  |     | NULL    |       |
+| status     | char(1)  | YES  |     | NULL    |       |
++------------+----------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>
 ERROR 1091 (42000): Can't DROP 'courseid'; check that column/key exists
 mysql>
