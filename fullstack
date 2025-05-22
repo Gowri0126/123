@@ -59,4 +59,142 @@ App.css:
 6. Prop Validation:
 -------------------
 App.js:
+import React from 'react';
+import PropTypes from 'prop-types';
+class App extends React.Component {
+    render() {
+        return (
+            <div>
+                <h2>Simple ReactJS Props validation example</h2>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Value</th>
+                        <th>Valid</th>
+                    </tr>
+                    <tr>
+                        <td>Array</td>
+                        <td>{this.props.propArray}</td>
+                        <td>{this.props.propArray ? "true" : "False"}</td>
+                    </tr>
+                    <tr>
+                        <td>Boolean</td>
+                        <td>{this.props.propBool ? "true" : "False"}</td>
+                        <td>{typeof this.props.propBool ? "true" : "False"}</td>
+                    </tr>
+                    <tr>
+                        <td>Function</td>
+                        <td>{this.props.propFunc(5)}</td>
+                        <td>{this.props.propFunc(5) ? "true" : "False"}</td>
+                    </tr>
+                    <tr>
+                        <td>String</td>
+                        <td>{this.props.propString}</td>
+                        <td>{typeof this.props.propString ? "true" : "False"}</td>
+                    </tr>
+                    <tr>
+                        <td>Number</td>
+                        <td>{this.props.propNumber}</td>
+                        <td>{ typeof this.props.propNumber ? "true" : "False"}</td>
+                    </tr>
+                </table>
+            </div>
+        );
+    }
+}
+
+App.propTypes = {
+    propArray: PropTypes.array.isRequired,
+    propBool: PropTypes.bool.isRequired,
+    propFunc: PropTypes.func,
+    propNumber: PropTypes.number,
+    propString: PropTypes.string,
+}
+
+App.defaultProps = {
+    propArray: [1, 2, 3, 4, 5],
+    propBool: true,
+    propFunc: function (x) { return x * 10 },
+    propNumber: 100,
+    propString: "GFG",
+}
+
+export default App;
+-----------------------------------
+1. Vehicle
+vehicle.jsx:
+import React from "react";
+
+function Vehicle(){
+    const layout={
+        width:"250 px",
+        color: "black",
+        backgroundColor:"lightgrey",
+        textalign:"center",
+        padding:"10px",
+        border:"1px solid black",
+        borderRadius:"10px",
+    };
+    
+    return(
+        <table style = {{borderspacing:"10 px"}}>
+            <tr>
+                <td style={layout}>
+                    <h3>Vehicle information</h3>
+                    <p><b>model:</b>Innova</p>
+                    <p><b>manufacturer:</b>Toyota</p>
+                    <p><b>year:</b>2000</p>
+                    <p><b>fuel type:</b>petrol</p>
+                    </td>
+
+                 <td style={layout}>
+                   <h3>Vehicle information</h3>
+                    <p><b>model:</b>Tata Tiago</p>
+                    <p><b>manufacturer:</b>Tata</p>
+                    <p><b>year:</b>2001</p>
+                    <p><b>fuel type:</b>Diesel</p>
+                    </td>
+
+                    <td style={layout}>
+                    <h3>Vehicle information</h3>
+                    <p><b>model:</b>Skoda</p>
+                    <p><b>manufacturer:</b>xyz</p>
+                    <p><b>year:</b>2002</p>
+                    <p><b>fuel type:</b>petrol</p>
+                    </td>
+
+                    <td style={layout}>
+                    <h3>Vehicle information</h3>
+                    <p><b>model:</b>Swift</p>
+                    <p><b>manufacturer:</b>abc</p>
+                    <p><b>year:</b>2003</p>
+                    <p><b>fuel type:</b>diesel</p>
+                    </td>
+
+                    <td style={layout}>
+                    <h3>Vehicle information</h3>
+                    <p><b>model:</b>Toyota</p>
+                    <p><b>manufacturer:</b>gef</p>
+                    <p><b>year:</b>2004</p>
+                    <p><b>fuel type:</b>petrol</p>
+                    </td>
+                    </tr>
+                    </table>           
+    );
+}
+export default Vehicle;
+---
+App.js:
+import React from "react";
+import Vehicle from './vehicle';
+
+function App(){
+  return(
+    <div>
+      <Vehicle/>
+    </div>
+  );
+}
+export default App;
+-------------------------------------------------
 
