@@ -197,4 +197,56 @@ function App(){
 }
 export default App;
 -------------------------------------------------
+3. Restaurants items
+Greetings.jsx:
+import React from "react";
+function Greetings() {
+  return (
+    <div>
+      <h1>Welcome to my Restaurant</h1>
+    </div>
+  );
+}
+
+export default Greetings;
+-----
+App.js:
+import React from "react";
+import Greetings from "./greetings";
+const App = () => {
+  const restaurants = [
+    {
+      id: 1,
+      name: "Albek",
+      items: [
+        { id: "p1", name: "Fried Rice", price: "100" },
+        { id: "p2", name: "Biriyani", price: "200" },
+      ],
+    },
+  ];
+
+  return (
+    <div>
+      <Greetings />
+      <h2>Restaurants List</h2>
+      <ul>
+        {restaurants.map((restaurant) => (
+          <li key={restaurant.id}>
+            <h3>{restaurant.name}</h3>
+            <ol>
+              {restaurant.items.map((item) => (
+                <li key={item.id}>
+                  <strong>{item.name}</strong>: ₹{item.price}
+                </li>
+              ))}
+            </ol>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
+-----------------------------------------------------------------------------
 
