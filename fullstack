@@ -1,1 +1,62 @@
+2. Countries and capitals
+new1.jsx:
+========
+import React from "react";
+import './App.css';
+
+
+const Countries=[
+    {name:"Canada" , capital:"Ottawa"},
+    {name:"India" , capital:"Delhi"},
+    {name:"Japan" , capital:"Tokyo"},
+];
+const New1 = ()=>(
+    <div className="Country">
+        <ul>
+            {Countries.map((country,index)=>(
+                <li key = {index}>
+                <strong> {country.name}</strong>:{country.capital}</li>
+
+            ))}</ul>
+    </div>
+);
+export default New1;
+----
+App.js:
+import React from 'react';
+import './App.css';
+import New1 from "./new1";
+
+
+function App(){
+  return(
+    <div className="App">
+      <h1>Countries and capitals</h1>
+    <New1/>
+    </div>
+  );
+}
+export default App;
+---
+App.css:
+.Country{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
+.Country li{
+    background-color: white;
+    padding:10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+.Country li strong{
+    color:pink;
+}
+.New1{
+    border: 2px solid black;
+}
+-----------------------------------------------------------
+6. Prop Validation:
+-------------------
+App.js:
 
