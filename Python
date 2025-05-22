@@ -1,7 +1,0 @@
-url_pattern = r'^(https?://)(www\.)?[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/.*)?$'
-#valid : 'http://example.com', 'https://www.google.com'
-#invalid : 'ftp://example.com' , ':missingprotocol.com'
-#b)
-phone_pattern = r'^\d{3}-?\d{3}-?\d{4}$'
-#valid examples : '123-456-7890' or '9087654321'
-#invalid examples : 'phone455' , '12-456-09'
