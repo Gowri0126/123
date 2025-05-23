@@ -249,4 +249,45 @@ const App = () => {
 
 export default App;
 -----------------------------------------------------------------------------
+4. Coursecard.jsx:
+import { Component } from "react";
+import React from "react";
+import propTypes from "prop-types";
+
+class CourseCard extends Component{
+    render()
+    {
+        const{courseTitle,duration,instructorName}=this.props;
+        return(
+            <div>
+                <h3>Course Title:{courseTitle}</h3>
+                <p>Duration:{duration}</p>
+                <p>InstructorName:{instructorName}</p>
+            </div>
+        );
+    }
+}
+CourseCard.propTypes={
+    courseTitle : propTypes.string.isRequired,
+    duration : propTypes.number.isRequired,
+    instructorName : propTypes.string.isRequired,
+};
+export default CourseCard;
+--------------
+App.js:
+import React from "react";
+import CourseCard from "./Coursecard";
+
+function App(){
+  return(
+    <div className="App">
+      <CourseCard courseTitle = "React.js" duration={3} instructorName="ABC">
+      </CourseCard>
+    </div>
+  );
+}
+export default App;
+--------------------------------------------------------------
+
+
 
