@@ -353,6 +353,76 @@ App.css:
   border-color: blue;
 }
 ------------
+26-05-25
+forms:
+Greetings.jsx:
+import React from "react";
+import { useState } from "react";
 
+function Op(){
+    let [name,setName]=useState("");
+
+    let hState=(e)=>{
+        e.preventDefault();
+        console.log("submitted name",name);
+        setName("");
+    }
+    return(
+        <form onSubmit={hState}>
+            <input type="text" onChange={(e)=>setName(e.target.value)} />
+            <input type="button" value="submit" />
+            </form>
+    );
+}
+
+export default Op;
+-----
+App.js
+import React from 'react';
+import Op from './Greeeting'
+
+function App(){
+  return(
+   <Op></Op>
+  );
+}
+export default App;
+------------
+Contactform- Greeting.jsx:
+import React, { useState }from 'react';
+const ContactForm = () => {
+const [email, setEmail]= useState('');
+const [message, setMessage]= useState('');
+const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitted: ${email} - ${message}`);
+};
+return(
+    <form onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} /><br />
+          <label>Message:</label>
+          <textarea
+           value={message}
+           onChange={(e) => setMessage(e.target.value)}></textarea><br />
+           <button type="submit">Send</button>
+           </form>
+);
+}
+export default ContactForm;
+App.js:
+import React from 'react';
+import ContactForm from './Greeting'
+
+function App(){
+  return(
+   <ContactForm/>
+  );
+}
+export default App;
+------------------------------------------
 
 
