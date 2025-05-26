@@ -326,11 +326,9 @@ App.css:
   padding: 20px;
   text-align: center;
 }
-
 .landmark {
   margin-top: 20px;
 }
-
 .landmark-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -338,7 +336,6 @@ App.css:
   margin-top: 20px;
   padding: 10px;
 }
-
 .landmark-item {
   border: 2px solid red;
   padding: 15px;
@@ -346,8 +343,6 @@ App.css:
   transition: transform 0.2s ease;
   background-color:lightgray;
 }
-
-
 .landmark-item:hover {
   transform: scale(1.05);
   border-color: blue;
