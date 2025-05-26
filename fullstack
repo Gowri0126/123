@@ -374,7 +374,7 @@ export default Op;
 -----
 App.js
 import React from 'react';
-import Op from './Greeeting'
+import Op from './Greeting'
 
 function App(){
   return(
