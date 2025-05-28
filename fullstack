@@ -419,5 +419,49 @@ function App(){
 }
 export default App;
 ------------------------------------------
+login form:
+import React, { useState }from 'react';
+import './App.css';
 
+const LoginForm = () => {
+const [username, setUsername]= useState('');
+const [password, setPassword]= useState('');
+const [show,setShow]= useState(false);
+const toggleShow = () => setShow(!show);
+
+const handleSubmit = (e) => {
+   
+    alert(`Logging in as: ${username}` );
+};
+return(
+    <form onSubmit={handleSubmit}>
+        <label>Username:</label>
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)} /><br />
+          <label>Password:</label>
+        <input
+          type={show ? 'text' : 'password'}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} /><br />
+
+            
+            <button type="button" onClick={toggleShow}>{show ? 'Hide' : 'Show'}</button>
+            </form>
+);
+}
+export default LoginForm;
+
+App.js:
+import React from 'react';
+import LoginForm from './Greeting';
+
+function App(){
+  return(
+   <LoginForm/>
+  );
+}
+export default App;
+----------
 
