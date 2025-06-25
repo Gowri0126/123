@@ -100,30 +100,28 @@ d.	The route PUT /students/:id should update the student’s name and/or course 
 e.	The route DELETE /students/:id should remove a student from the list and return the details of the deleted student.
 f.	Use express.json() middleware to parse JSON input, and use res.send() for all output. Ensure appropriate status codes and messages are used for both success and error responses.
 ---------------------
-const express = require('express');
+import express from 'express';
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-// Initial in-memory student records
 let students = [
-  { id: 1, name: 'Alice', course: 'Math' },
-  { id: 2, name: 'Bob', course: 'Physics' },
-  { id: 3, name: 'Charlie', course: 'Chemistry' },
+  { id: 1, name: 'Anup', course: 'Math' },
+  { id: 2, name: 'Meera', course: 'Physics' },
+  { id: 3, name: 'kia', course: 'Chemistry' },
 ];
 
-// Helper to generate a new unique ID
 const getNextId = () => {
   return students.length ? Math.max(...students.map(s => s.id)) + 1 : 1;
 };
 
-// a. GET /students - return all students
+// a. GET /students 
 app.get('/students', (req, res) => {
   res.send(students);
 });
 
-// b. GET /students/:id - return student by ID
+// b. GET /students/:id 
 app.get('/students/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const student = students.find(s => s.id === id);
@@ -135,7 +133,7 @@ app.get('/students/:id', (req, res) => {
   res.send(student);
 });
 
-// c. POST /students - add a new student
+// c. POST /students
 app.post('/students', (req, res) => {
   const { name, course } = req.body;
 
@@ -153,7 +151,7 @@ app.post('/students', (req, res) => {
   res.status(201).send({ message: 'Student added successfully.', student: newStudent });
 });
 
-// d. PUT /students/:id - update student details
+// d. PUT /students/:id 
 app.put('/students/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const { name, course } = req.body;
@@ -169,7 +167,7 @@ app.put('/students/:id', (req, res) => {
   res.send({ message: 'Student updated successfully.', student: students[studentIndex] });
 });
 
-// e. DELETE /students/:id - remove student
+// e. DELETE /students/:id 
 app.delete('/students/:id', (req, res) => {
   const id = parseInt(req.params.id);
   const studentIndex = students.findIndex(s => s.id === id);
