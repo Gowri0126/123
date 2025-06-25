@@ -541,3 +541,40 @@ app.delete('/users/:id', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
+*/*/*/*/*/*/*/*
+import express from 'express';
+
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+let products = [
+  { id: 1, name: "Laptop", price: 1200, stock: 5 },
+  { id: 2, name: "Smartphone", price: 800, stock: 10 },
+  { id: 3, name: "Headphones", price: 150, stock: 25 }
+];
+
+app.put('/products/:id', (req, res) => {
+  const productId = parseInt(req.params.id);
+  const { name, price, stock } = req.body;
+
+  const product = products.find(p => p.id === productId);
+
+  if (!product) {
+    return res.status(404).json({ message: `Product with ID ${productId} not found.` });
+  }
+
+  if (name !== undefined) product.name = name;
+  if (price !== undefined) product.price = price;
+  if (stock !== undefined) product.stock = stock;
+
+  res.json({
+    message: `Product with ID ${productId} has been updated.`,
+    product
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
