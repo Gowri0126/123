@@ -99,3 +99,89 @@ c.	The route POST /students should accept a new student's name and course via th
 d.	The route PUT /students/:id should update the student’s name and/or course for the given ID. If the student does not exist, the server should return a 404 error.
 e.	The route DELETE /students/:id should remove a student from the list and return the details of the deleted student.
 f.	Use express.json() middleware to parse JSON input, and use res.send() for all output. Ensure appropriate status codes and messages are used for both success and error responses.
+---------------------
+const express = require('express');
+const app = express();
+const port = 3000;
+
+app.use(express.json());
+
+// Initial in-memory student records
+let students = [
+  { id: 1, name: 'Alice', course: 'Math' },
+  { id: 2, name: 'Bob', course: 'Physics' },
+  { id: 3, name: 'Charlie', course: 'Chemistry' },
+];
+
+// Helper to generate a new unique ID
+const getNextId = () => {
+  return students.length ? Math.max(...students.map(s => s.id)) + 1 : 1;
+};
+
+// a. GET /students - return all students
+app.get('/students', (req, res) => {
+  res.send(students);
+});
+
+// b. GET /students/:id - return student by ID
+app.get('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const student = students.find(s => s.id === id);
+
+  if (!student) {
+    return res.status(404).send({ message: `Student with ID ${id} not found.` });
+  }
+
+  res.send(student);
+});
+
+// c. POST /students - add a new student
+app.post('/students', (req, res) => {
+  const { name, course } = req.body;
+
+  if (!name || !course) {
+    return res.status(400).send({ message: 'Name and course are required.' });
+  }
+
+  const newStudent = {
+    id: getNextId(),
+    name,
+    course,
+  };
+
+  students.push(newStudent);
+  res.status(201).send({ message: 'Student added successfully.', student: newStudent });
+});
+
+// d. PUT /students/:id - update student details
+app.put('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const { name, course } = req.body;
+  const studentIndex = students.findIndex(s => s.id === id);
+
+  if (studentIndex === -1) {
+    return res.status(404).send({ message: `Student with ID ${id} not found.` });
+  }
+
+  if (name) students[studentIndex].name = name;
+  if (course) students[studentIndex].course = course;
+
+  res.send({ message: 'Student updated successfully.', student: students[studentIndex] });
+});
+
+// e. DELETE /students/:id - remove student
+app.delete('/students/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const studentIndex = students.findIndex(s => s.id === id);
+
+  if (studentIndex === -1) {
+    return res.status(404).send({ message: `Student with ID ${id} not found.` });
+  }
+
+  const removedStudent = students.splice(studentIndex, 1)[0];
+  res.send({ message: 'Student deleted successfully.', student: removedStudent });
+});
+
+app.listen(port, () => {
+  console.log(`Student management app listening at http://localhost:${port}`);
+});
