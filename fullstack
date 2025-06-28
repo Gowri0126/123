@@ -1,24 +1,5 @@
-3.	Design and implement an Express.js application to manage a list of books. Each book must have an id, title, and author. Initialize the application with at least two predefined books stored in an in-memory array. The application must support the following functionalities:
 
-a.	The GET /books route should return the list of all books.
-b.	The POST /books route should accept a new book's title and author in the request body, assign it a unique id, add it to the array, and return a confirmation message.
-c.	The PUT /books/:id route should update an existing book’s title and/or author based on the id provided in the URL. Only the fields present in the request body should be updated. If the book is not found, return a 404 status with an appropriate message.
-d.	The DELETE /books/:id route should remove a book by its id. If the book does not exist, return a 404 error. Otherwise, return a success message indicating which book was deleted.
-e.	Ensure proper use of express.json() middleware and return all responses in plain text format using res.send().
-------------------------
 
-const express = require('express');
-const app = express();
-const port = 3000;
-
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-// In-memory book list initialized with two books
-let books = [
-  { id: 1, title: "1984", author: "George Orwell" },
-  { id: 2, title: "To Kill a Mockingbird", author: "Harper Lee" }
-];
 ---------------------------------------------------------------------------------------------------
 5.	Create an Express.js application to simulate a simple task management system. Each task should have an id, title, description, and a status field (e.g., “pending”, “in-progress”, “completed”). Initialize the application with at least two tasks in an in-memory array.
 
@@ -105,7 +86,7 @@ app.delete('/tasks/:id', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
+-----------------------
 /*
 GET /books — lists all books (in plain text)
 
