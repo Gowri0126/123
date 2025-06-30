@@ -167,94 +167,12 @@ You’ll get the deleted task returned or a 404 if the task wasn’t found.
 
 
 -------------------------------------------------------------------------------------------
-4.	Develop an Express.js application that provides basic functionality for managing student records. Each student should have an id, name, and course. Initialize the application with at least three student records in an in-memory array. The application must implement the following:
-a.	The route GET /students should return a list of all students.
-b.	The route GET /students/:id should return details of a single student based on the ID provided in the URL.
-c.	The route POST /students should accept a new student's name and course via the request body, assign a unique ID, add the student to the array, and return a message confirming the addition.
-d.	The route PUT /students/:id should update the student’s name and/or course for the given ID. If the student does not exist, the server should return a 404 error.
-e.	The route DELETE /students/:id should remove a student from the list and return the details of the deleted student.
-f.	Use express.json() middleware to parse JSON input, and use res.send() for all output. Ensure appropriate status codes and messages are used for both success and error responses.
----------------------
-import express from 'express';
-const app = express();
-const port = 3000;
-
-app.use(express.json());
-
-let students = [
-  { id: 1, name: 'Anup', course: 'Math' },
-  { id: 2, name: 'Meera', course: 'Physics' },
-  { id: 3, name: 'kia', course: 'Chemistry' },
-];
-
-const getNextId = () => {
-  return students.length ? Math.max(...students.map(s => s.id)) + 1 : 1;
-};
-
-// a. GET /students 
-app.get('/students', (req, res) => {
-  res.send(students);
-});
-
-// b. GET /students/:id 
-app.get('/students/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const student = students.find(s => s.id === id);
-
-  if (!student) {
-    return res.status(404).send({ message: `Student with ID ${id} not found.` });
-  }
-
-  res.send(student);
-});
-
-// c. POST /students
-app.post('/students', (req, res) => {
-  const { name, course } = req.body;
-
-  if (!name || !course) {
-    return res.status(400).send({ message: 'Name and course are required.' });
-  }
-
-  const newStudent = {
-    id: getNextId(),
-    name,
-    course,
-  };
-
-  students.push(newStudent);
-  res.status(201).send({ message: 'Student added successfully.', student: newStudent });
-});
-
-// d. PUT /students/:id 
-app.put('/students/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const { name, course } = req.body;
-  const studentIndex = students.findIndex(s => s.id === id);
-
-  if (studentIndex === -1) {
-    return res.status(404).send({ message: `Student with ID ${id} not found.` });
-  }
-
-  if (name) students[studentIndex].name = name;
-  if (course) students[studentIndex].course = course;
-
-  res.send({ message: 'Student updated successfully.', student: students[studentIndex] });
-});
-
-// e. DELETE /students/:id 
-app.delete('/students/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const studentIndex = students.findIndex(s => s.id === id);
-
-  if (studentIndex === -1) {
-    return res.status(404).send({ message: `Student with ID ${id} not found.` });
-  }
-
-  const removedStudent = students.splice(studentIndex, 1)[0];
-  res.send({ message: 'Student deleted successfully.', student: removedStudent });
-});
-
-app.listen(port, () => {
-  console.log(`Student management app listening at http://localhost:${port}`);
-});
+1. Create an Express.js app using EJS that renders a movie gallery:
+.Render a list of movies with titles and ratings.
+.Use a layout file with a header/footer and external CSS to style the cards.
+.highlight movies with a rating above 8 in a different color using conditional rendering.
+-----------------
+2. Design a feedback form for a travel website using Express and multer:
+.The form should collect name,email, and a screenshot of an issue.
+.Use multer.diskStorage() to save the image to an uploads/folder.
+.On submission display the input and image preview using EJS
