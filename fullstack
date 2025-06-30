@@ -167,6 +167,9 @@ You’ll get the deleted task returned or a 404 if the task wasn’t found.
 
 
 -------------------------------------------------------------------------------------------
+
+<npm install ejs>
+<npm install pug>
 1. Create an Express.js app using EJS that renders a movie gallery:
 .Render a list of movies with titles and ratings.
 .Use a layout file with a header/footer and external CSS to style the cards.
