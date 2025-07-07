@@ -11,62 +11,20 @@
 .The form should collect name,email, and a screenshot of an issue.
 .Use multer.diskStorage() to save the image to an uploads/folder.
 .On submission display the input and image preview using EJS
--------------------
-3. index.pug:
-doctype html 
-html 
-    head
-      title=title 
-      style.
-        ul{
-          color:green;
-        }
-      link(rel='stylesheet',href='/style.css')
-    body 
-        h1 Egg Pepper Salt
-        img(src="https://bittmanproject.com/wp-content/uploads/GettyImages-1309107688-hbeggs-800x610.jpg" width="350" height="200")
-        h3 Ingredients
-        <ul>
-        <li>Eggs</li>
-        <li>Black Pepper</li>
-        <li>Salt</li>
-        </ul>
-
-        h3 Steps 
-        <ol>
-        <li>boil the eggs</li>
-        <li>cut into halves</li>
-        <li>Add pepper and salt to it</li>
-        </ol>
----
-index.ejs:
-<!DOCTYPE html>
-<html>
-    <head>
-    <title>Express JS</title>
-    <link rel="stylesheet" href="style.css">
-    
-    </head>
-    <body>
-      
-        
-    </body>
-</html>
----
-index.js:
-import express from 'express';
-
-const app = express()
-const port = 3001
-
-
-app.set('view engine', 'pug');
-app.get('/',(req,res) => {
-    res.render('index');
-})
-
-
-app.listen(port, () => {
-    console.log(`Example app listening on port http://localhost:${port}`)
-})
 ---------------------------------------------------------------
+1)Create a student portal login system using Express.js
+. Create a /register route to add student with a rollNo,name,and password.
+. Use express-session to store the session after successful login form/login
+. On login, also set a cookie studentPortalAccess with student's roll number and an expiry of 3 minutes
+. Use middleware(cookie-parser and express-session) to manage cookies and sessions
+
+2) Design a protected route/result that only logged-in students can access
+. Use session middleware to verify if student is logged in.
+. If valid, show:"Hi [name],your results are available!
+. If not, return:"Access denied:Please login to view results".
+. Add a /logout route to destroy the session and clear the cookie.
+
+3) Build a course enrollment route/courses with GET and POST
+. Use GET/courses to return a list of available courses(only if logged in)
+. Use POST /courses to enroll the logged-in student into a course.
+------------------------
