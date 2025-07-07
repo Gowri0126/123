@@ -27,4 +27,8 @@
 3) Build a course enrollment route/courses with GET and POST
 . Use GET/courses to return a list of available courses(only if logged in)
 . Use POST /courses to enroll the logged-in student into a course.
+.On successful enrollment,create a cookie named lastEnrolledCourse(valid for 2mins).
+. Add error handlingfor:
+  ..  Trying to enroll without being logged in
+  ..  Enrolling in a course already taken
 ------------------------
