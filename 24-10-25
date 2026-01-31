@@ -1,0 +1,102 @@
+Steps:
+mca_b1@mcalab1:~/my_first_project$ git config --global init.defaultBranch main
+mca_b1@mcalab1:~/my_first_project$ git init
+Reinitialized existing Git repository in /home/mca_b1/my_first_project/.git/
+mca_b1@mcalab1:~/my_first_project$ git remote add origin https://github.com/gowrisg162/demo_project.git
+mca_b1@mcalab1:~/my_first_project$ git remote -v
+origin	https://github.com/gowrisg162/demo_project.git (fetch)
+origin	https://github.com/gowrisg162/demo_project.git (push)
+mca_b1@mcalab1:~/my_first_project$ echo "#this is the brief description about my project">readme.txt
+mca_b1@mcalab1:~/my_first_project$ git add .
+mca_b1@mcalab1:~/my_first_project$ git commit -m "readme done.."
+[master c65b232] readme done..
+ 1 file changed, 1 insertion(+)
+ create mode 100644 readme.txt
+mca_b1@mcalab1:~/my_first_project$ git push -u origin main
+error: src refspec main does not match any
+error: failed to push some refs to 'https://github.com/gowrisg162/demo_project.git'
+mca_b1@mcalab1:~/my_first_project$ git push -u origin master
+Username for 'https://github.com': pnp
+Password for 'https://pnp@github.com': 
+mca_b1@mcalab1:~/my_first_project$ git push -u origin master
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/gowrisg162/demo_project.git/'
+mca_b1@mcalab1:~/my_first_project$ git push -u origin master
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/gowrisg162/demo_project.git/'
+mca_b1@mcalab1:~/my_first_project$ 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
+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: command not found
+mca_b1@mcalab1:~/my_first_project$ git push -u origin master
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+Enumerating objects: 6, done.
+Counting objects: 100% (6/6), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (6/6), 517 bytes | 517.00 KiB/s, done.
+Total 6 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/gowrisg162/demo_project.git
+ * [new branch]      master -> master
+branch 'master' set up to track 'origin/master'.
+mca_b1@mcalab1:~/my_first_project$ git checkout -b feature-login
+Switched to a new branch 'feature-login'
+mca_b1@mcalab1:~/my_first_project$ git add .
+mca_b1@mcalab1:~/my_first_project$ git commit -m "added the new feature"
+On branch feature-login
+nothing to commit, working tree clean
+mca_b1@mcalab1:~/my_first_project$ git push -u origin feature-login
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+fatal: Authentication failed for 'https://github.com/gowrisg162/demo_project.git/'
+mca_b1@mcalab1:~/my_first_project$ git push -u origin feature-login
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+remote: 
+remote: Create a pull request for 'feature-login' on GitHub by visiting:
+remote:      https://github.com/gowrisg162/demo_project/pull/new/feature-login
+remote: 
+To https://github.com/gowrisg162/demo_project.git
+ * [new branch]      feature-login -> feature-login
+branch 'feature-login' set up to track 'origin/feature-login'.
+mca_b1@mcalab1:~/my_first_project$ git fetch origin
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+mca_b1@mcalab1:~/my_first_project$ git branch -a
+* feature-login
+  master
+  remotes/origin/feature-login
+  remotes/origin/master
+mca_b1@mcalab1:~/my_first_project$ git log master..feature_login
+fatal: ambiguous argument 'master..feature_login': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+mca_b1@mcalab1:~/my_first_project$ git log master..feature-login
+mca_b1@mcalab1:~/my_first_project$ git diff master..feature-login
+mca_b1@mcalab1:~/my_first_project$ git status
+On branch feature-login
+Your branch is up to date with 'origin/feature-login'.
+
+nothing to commit, working tree clean
+mca_b1@mcalab1:~/my_first_project$ git checkout master
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+mca_b1@mcalab1:~/my_first_project$ git pull origin master
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+From https://github.com/gowrisg162/demo_project
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+mca_b1@mcalab1:~/my_first_project$ git branch -d feature-login
+Deleted branch feature-login (was c65b232).
+mca_b1@mcalab1:~/my_first_project$ git push origin --delete feature-login
+Username for 'https://github.com': gowri
+Password for 'https://gowri@github.com': 
+To https://github.com/gowrisg162/demo_project.git
+ - [deleted]         feature-login
+
