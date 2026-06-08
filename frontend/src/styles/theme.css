@@ -1,0 +1,144 @@
+:root {
+  --bg: #0b0f19;
+  --panel: #111827;
+  --panel2: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --primary: #3b82f6;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --warning: #facc15;
+  --border: #1f2937;
+}
+
+/* GLOBAL */
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* DASHBOARD LAYOUT */
+.dashboard {
+  padding: 20px;
+}
+
+/* HEADER */
+.header {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.subtext {
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+/* CARDS */
+.card {
+  background: linear-gradient(145deg, var(--panel), var(--panel2));
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* BUTTONS */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  margin-right: 10px;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+}
+
+/* TABLE */
+.row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* STATUS BADGES */
+.badge-safe {
+  color: var(--success);
+}
+
+.badge-warning {
+  color: var(--warning);
+}
+
+.badge-danger {
+  color: var(--danger);
+}
+.card:hover {
+  transform: scale(1.01);
+  transition: 0.2s;
+  box-shadow: 0 0 20px rgba(59,130,246,0.2);
+}
+@keyframes blink {
+  50% {
+    opacity: 0.2;
+  }
+}
+
+/* CAMERA ACTIVE */
+.dot-camera {
+  width: 10px;
+  height: 10px;
+  background: red;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 8px red;
+}
+
+/* MIC ACTIVE */
+.dot-mic {
+  width: 10px;
+  height: 10px;
+  background: orange;
+  border-radius: 50%;
+  display: inline-block;
+  animation: blink 1s infinite;
+  box-shadow: 0 0 8px orange;
+}
+
+/* SAFE */
+.dot-safe {
+  width: 10px;
+  height: 10px;
+  background: limegreen;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 6px limegreen;
+}
+button {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.controls {
+  z-index: 10;
+  position: relative;
+}
